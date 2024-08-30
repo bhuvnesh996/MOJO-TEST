@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const FacebookLogin = ({ onLogin }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     window.fbAsyncInit = function () {
@@ -34,7 +34,7 @@ const FacebookLogin = ({ onLogin }) => {
     } else {
       setIsLoggedIn(false);
       setUser(null);
-      setError(null); 
+      setError(null);
     }
   };
 
@@ -67,15 +67,19 @@ const FacebookLogin = ({ onLogin }) => {
   };
 
   return (
-    <div>
-      {!isLoggedIn && <button onClick={handleLogin}>Login with Facebook</button>}
-      {isLoggedIn && user && (
-        <div>
-          <h2>Welcome, {user.name}</h2>
-          <img src={user.picture.data.url} alt={user.name} />
-        </div>
-      )}
-      {error && <div className="error">{error}</div>} {}
+    <div className="homepage">
+    
+
+      <div className="facebook-login-section">
+        {!isLoggedIn && <button onClick={handleLogin} className="facebook-button">Login with Facebook</button>}
+        {isLoggedIn && user && (
+          <div className="user-info">
+            <h2>Welcome, {user.name}</h2>
+            <img src={user.picture.data.url} alt={user.name} />
+          </div>
+        )}
+        {error && <div className="error">{error}</div>}
+      </div>
     </div>
   );
 };

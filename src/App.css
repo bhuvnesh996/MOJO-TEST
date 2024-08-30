@@ -99,3 +99,50 @@ select {
     max-width: 400px;
   }
 }
+/* App.css */
+
+.app-container {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #18064c;
+  padding: 10px;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end; /* Aligns items to the right */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 20px; /* Adds space between items */
+}
+
+.app-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.content {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.extra-content {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.demo-image {
+  width: 200px;
+  height: auto;
+  margin: 10px;
+}
+

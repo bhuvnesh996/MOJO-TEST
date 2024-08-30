@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FacebookLogin from './components/FacebookLogin';
 import PageSelector from './components/PageSelector';
 import PageInsights from './components/PageInsights';
+import Navbar from './components/Navbar'; // New Navbar component
 import './App.css'; 
 
 const App = () => {
@@ -15,7 +16,6 @@ const App = () => {
   };
 
   const handleSelectPage = async (pageId) => {
-    // Clear old data
     setPageAccessToken(null);
     setSelectedPage(null);
 
@@ -50,21 +50,29 @@ const App = () => {
   };
 
   return (
-    <div>
-      <FacebookLogin onLogin={handleLogin} />
-      {userAccessToken && (
-        <>
-          <PageSelector accessToken={userAccessToken} onSelectPage={handleSelectPage} />
-          {selectedPage && pageAccessToken && (
-            <PageInsights
-              pageId={selectedPage}
-              pageAccessToken={pageAccessToken}
-              since="2024-08-01"
-              until="2024-08-29"
-            />
-          )}
-        </>
-      )}
+    <div className="app-container">
+      <Navbar />
+
+     
+
+      <div className="content">
+        <FacebookLogin onLogin={handleLogin} />
+        {userAccessToken && (
+          <>
+            <PageSelector accessToken={userAccessToken} onSelectPage={handleSelectPage} />
+            {selectedPage && pageAccessToken && (
+              <PageInsights
+                pageId={selectedPage}
+                pageAccessToken={pageAccessToken}
+                since="2024-08-01"
+                until="2024-08-29"
+              />
+            )}
+          </>
+        )}
+      </div>
+
+      
     </div>
   );
 };
