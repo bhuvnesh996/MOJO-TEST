@@ -65,7 +65,7 @@ const App = () => {
                 pageId={selectedPage}
                 pageAccessToken={pageAccessToken}
                 since="2024-08-01"
-                until="2024-08-29"
+                until="2024-10-29"
               />
             )}
           </>

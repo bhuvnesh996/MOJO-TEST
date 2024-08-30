@@ -13,7 +13,8 @@ const PageInsights = ({ pageId, pageAccessToken, since, until }) => {
 
   useEffect(() => {
     if (pageId && pageAccessToken) {
-      const metrics = 'page_fans,page_impressions,post_engaged_users,page_actions_post_reactions_like_total,page_actions_post_reactions_love_total,page_actions_post_reactions_wow_total,page_actions_post_reactions_haha_total,page_actions_post_reactions_sorry_total,page_actions_post_reactions_anger_total';
+      // Corrected metric names
+      const metrics = 'page_daily_follows_unique,page_impressions_unique,page_post_engagements,page_actions_post_reactions_like_total';
       const url = `https://graph.facebook.com/v20.0/${pageId}/insights?metric=${metrics}&since=${since}&until=${until}&period=total_over_range&access_token=${pageAccessToken}`;
 
       console.log('Starting API request to URL:', url);
@@ -38,14 +39,19 @@ const PageInsights = ({ pageId, pageAccessToken, since, until }) => {
           };
 
           data.data.forEach(insight => {
-            if (insight.name.startsWith('page_actions_post_reactions_')) {
-              updatedInsights.page_reactions += insight.values[0]?.value || 0;
-            } else {
-              updatedInsights[insight.name] = insight.values[0]?.value || 0;
-            }
-          });
+           
+            if (insight.name === 'page_daily_follows_unique') {
+              updatedInsights.page_fans = insight.values[0]?.value || 0;
+            } else if (insight.name === 'page_post_engagements') {
+              updatedInsights.post_engaged_users = insight.values[0]?.value || 0;
+            } else if (insight.name === 'page_impressions_unique') {
+              updatedInsights.page_impressions = insight.values[0]?.value || 0;
+            } else if (insight.name === 'page_actions_post_reactions_like_total') {
+               updatedInsights.page_reactions = insight.values[0]?.value;
 
-          setInsights(updatedInsights);
+            }});
+  console.log(data);
+           setInsights(updatedInsights);
           setLoading(false);
         })
         .catch(error => {
