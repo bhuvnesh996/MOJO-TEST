@@ -12,7 +12,7 @@ const App = () => {
 
   const handleLogin = (token) => {
     setUserAccessToken(token);
-    console.log('User Access Token:', token);
+    console.log('User Access Token', token);
   };
 
   const handleSelectPage = async (pageId) => {
